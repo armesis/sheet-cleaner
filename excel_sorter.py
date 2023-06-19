@@ -1,9 +1,8 @@
 import subprocess
 import sys
-
 import re
 
-
+#package management
 def install_and_import(package):
     import importlib
     try:
@@ -14,8 +13,9 @@ def install_and_import(package):
     finally:
         globals()[package] = importlib.import_module(package)
 
-
 install_and_import('openpyxl')
+
+
 
 numbers = 0
 alphabets = ""
@@ -29,13 +29,14 @@ def separateNumbersAlphabets(kelime):
     alphabets = re.findall(r'[a-zA-Z]+', kelime)
 
 
-path = input("le nom du fichier = ")
+path = input("your file name = ")
 
 wb_obj = openpyxl.load_workbook(path)
 
 sheet_obj = wb_obj.active
-rows = int(input("nombre de lignes = "))
-column = int(input("nombre de colonnes = "))
+
+rows = int(input("number of rows = "))
+column = int(input("number of columns = "))
 
 print(str(rows) + " x " + str(column))
 
