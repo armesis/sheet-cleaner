@@ -40,8 +40,9 @@ column = int(input("number of columns = "))
 
 print(str(rows) + " x " + str(column))
 
-for c in range(1, column):
-    for r in range(1, rows):
+# openpyxl uses 1-based indexing. include the user supplied limits
+for c in range(1, column + 1):
+    for r in range(1, rows + 1):
         cell_obj = sheet_obj.cell(row=r, column=c)
         temp_cell = cell_obj.value
         if type(temp_cell) is float:
@@ -53,7 +54,8 @@ for c in range(1, column):
         if temp_cell is None:
             print("empty")
             continue
-        if temp_cell.isalpha:
+        # only process textual values
+        if isinstance(temp_cell, str) and temp_cell.isalpha():
             separateNumbersAlphabets(temp_cell)
             print(temp_cell[::-1])
             for k in temp_cell[::-1]:
